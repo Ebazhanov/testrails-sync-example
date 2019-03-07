@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Master" verbose="1">
+
+    <listeners>
+        <listener class-name="com.example.automation.utils.TestListener" />
+    </listeners>
+
+    <test name="SystemTests">
+        <packages>
+            <package name="com.example.system_tests.*" />
+        </packages>
+    </test>
+</suite>

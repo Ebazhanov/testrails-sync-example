@@ -1,0 +1,46 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src']
+        }
+    }
+    test {
+        java {
+            srcDirs = ['test']
+        }
+    }
+}
+
+test {
+    // enable TestNG support (default is JUnit)
+    useTestNG() {
+        suites 'test/resources/full_test_suite.xml'
+    }
+
+    //Show full exception on failure
+    testLogging {
+        exceptionFormat = 'full'
+        showStandardStreams = true
+    }
+
+    //Convenience .. pipe all test results to SDOUT
+    afterTest { desc, result ->
+        println "${desc.className} ${desc.name} ${result.resultType}"
+    }
+
+    //Force tests to always run, even if they haven't been updated
+    outputs.upToDateWhen { false }
+}
+
+dependencies {
+    compile 'org.seleniumhq.selenium:selenium-java:3.14.0'
+    compile 'org.testng:testng:6.10'
+    compile 'com.codepine.api:testrail-api-java-client:2.0.0'
+    compile 'io.github.bonigarcia:webdrivermanager:3.0.0'
+}
